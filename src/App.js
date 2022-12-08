@@ -1,14 +1,14 @@
-import React from 'react'
-import FilterButton from "./components/FilterButton";
+import React, { useState } from 'react';
+import Form from './components/Form';
+import FilterButton from './components/FilterButton';
 import Todo from "./components/Todo";
-import Form from "./components/Form";
-
-
+import { nanoid } from 'https://cdn.jsdelivr.net/npm/nanoid/nanoid.js'
 
 function App(props) {
-
+  const [tasks, setTasks] = useState(props.tasks);
   // const taskList = props.tasks?.map((task) => task.name)
-  const taskList = props.tasks.map((task) => (
+
+  const taskList = tasks.map((task) => (
     <Todo
       id={task.id}
       name={task.name}
@@ -16,14 +16,39 @@ function App(props) {
       key={task.id} />
   ));
 
+  const addTask = (name) => {
+    const newTask = { id: `todo-${nanoid()}`, name, completed: false };
+    setTasks([...tasks, newTask]);
+  }
 
-
+  const tasksNoun = taskList.length !== 1 ? 'tasks' : 'task';
+  const headingText = `${taskList.length} ${tasksNoun} remaining`;
 
   return (
     <div className="todoapp stack-large">
       <h1>TodoMatic</h1>
-
+      <Form
+        addTask={addTask} />
+      {/* <form>
+        <h2 className="label-wrapper">
+          <label htmlFor="new-todo-input" className="label__lg">
+            What needs to be done?
+          </label>
+        </h2>
+        <input
+          type="text"
+          id="new-todo-input"
+          className="input input__lg"
+          name="text"
+          autoComplete="off"
+        />
+        <button type="submit" className="btn btn__primary btn__lg">
+          Add
+        </button>
+      </form> */}
       <div className="filters btn-group stack-exception">
+        <FilterButton />
+        <FilterButton />
         <FilterButton />
 
         {/* <button type="button" className="btn toggle-btn" aria-pressed="true">
@@ -43,24 +68,19 @@ function App(props) {
         </button> */}
       </div>
 
-      <h2 id="list-heading">
-        3 tasks remaining
-      </h2>
-
+      <h2 id="list-heading">{headingText}</h2>
       <ul
       // role="list"
       // className="todo-list stack-large stack-exception"
       // aria-labelledby="list-heading"
       >
         {taskList}
-
         {/* <Todo name="eat" completed={true} id="todo-0" />
         <Todo name="sleep" completed={false} id="todo-1" />
         <Todo name="repeat" completed={false} id="todo-2" /> */}
-
       </ul>
     </div>
   );
 }
-
 export default App;
+
