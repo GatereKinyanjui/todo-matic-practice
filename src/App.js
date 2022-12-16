@@ -19,6 +19,17 @@ function App(props) {
     console.log(id)
   }
 
+  const editTask = (id, newName) => {
+    const editedTaskList = tasks.map((task) => {
+      if (id === task.id) {
+        return { ...task, name: newName }
+      }
+      return task;
+    });
+    setTasks(editedTaskList);
+    console.log(id, newName);
+  }
+
   const deleteTask = (id) => {
     const remainingTasks = tasks.filter((task) => {
       return id !== task.id;
@@ -34,7 +45,8 @@ function App(props) {
       completed={task.completed}
       key={task.id}
       toggleTaskCompleted={toggleTaskCompleted}
-      deleteTask={deleteTask} />
+      deleteTask={deleteTask}
+      editTask={editTask} />
   ));
 
   // add a new task default being incomplete; gen UID for each
