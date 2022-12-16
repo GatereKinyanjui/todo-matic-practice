@@ -4,9 +4,17 @@ import FilterButton from './components/FilterButton';
 import Todo from "./components/Todo";
 import { nanoid } from 'https://cdn.jsdelivr.net/npm/nanoid/nanoid.js'
 
+const FILTER_MAP = {
+  All: () => true,
+  Active: (task) => !task.completed,
+  Completed: (task) => task.completed
+}
+const FILTER_NAMES = Object.keys(FILTER_MAP);
 
 function App(props) {
   const [tasks, setTasks] = useState(props.tasks);
+  const [filter, setFilter] = useState('All');
+
   // const taskList = props.tasks?.map((task) => task.name)
   const toggleTaskCompleted = (id) => {
     const updatedTasks = tasks.map((task) => {
@@ -38,7 +46,7 @@ function App(props) {
     console.log(id);
   }
 
-  const taskList = tasks.map((task) => (
+  const taskList = tasks.filter(FILTER_MAP[filter]).map((task) => (
     <Todo
       id={task.id}
       name={task.name}
@@ -47,6 +55,14 @@ function App(props) {
       toggleTaskCompleted={toggleTaskCompleted}
       deleteTask={deleteTask}
       editTask={editTask} />
+  ));
+
+  const filterList = FILTER_NAMES.map((name) => (
+    <FilterButton
+      key={name}
+      name={name}
+      isPressed={name === filter}
+      setFilter={setFilter} />
   ));
 
   // add a new task default being incomplete; gen UID for each
@@ -81,9 +97,7 @@ function App(props) {
         </button>
       </form> */}
       <div className="filters btn-group stack-exception">
-        <FilterButton />
-        <FilterButton />
-        <FilterButton />
+        {filterList}
 
         {/* <button type="button" className="btn toggle-btn" aria-pressed="true">
           <span className="visually-hidden">Show </span>

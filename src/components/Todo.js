@@ -36,7 +36,7 @@ const Todo = (props) => {
                     Cancel
                     <span className="visually-hidden">Renaming {props.name}</span>
                 </button>
-                <button type="button" className="btn btn__primary todo-edit">
+                <button type="button" className="btn btn__primary todo-edit" onClick={() => setNewName()}>
                     Save
                     <span className="visually-hidden"> New name for {props.name}</span>
                 </button>
