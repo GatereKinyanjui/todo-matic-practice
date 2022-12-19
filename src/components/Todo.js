@@ -13,6 +13,9 @@ const Todo = (props) => {
     }
     const handleSubmit = (e) => {
         e.preventDefault();
+        if (!newName.trim()) {
+            return;
+        }
         props.editTask(props.id, newName);
         setNewName('');
         setEditing(false);
@@ -27,6 +30,7 @@ const Todo = (props) => {
                 <input
                     type="text"
                     className="todo-text"
+                    placeholder='Edit task'
                     id={props.name}
                     value={newName}
                     onChange={handleChange} />
@@ -36,7 +40,7 @@ const Todo = (props) => {
                     Cancel
                     <span className="visually-hidden">Renaming {props.name}</span>
                 </button>
-                <button type="button" className="btn btn__primary todo-edit" onClick={() => setNewName()}>
+                <button type="button" className="btn btn__primary todo-edit" >
                     Save
                     <span className="visually-hidden"> New name for {props.name}</span>
                 </button>

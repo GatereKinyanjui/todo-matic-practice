@@ -8,12 +8,6 @@ const Form = (props) => {
             props.addTask(name);
             setName('');
         }
-        // if (e.target.value !== '') {
-        //     props.addTask(name)
-        // } else {
-        //     alert("Please add a task ;-)")
-        // }
-        // setName('');
     }
 
     const [name, setName] = useState('');
