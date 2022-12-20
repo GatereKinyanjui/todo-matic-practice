@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/todo-matic/static/css/main.df0bb1d6.css",
+    "main.js": "/todo-matic/static/js/main.a79b794d.js",
+    "static/media/chesnagrotesk-medium.otf": "/todo-matic/static/media/chesnagrotesk-medium.45cd419b32606122147b.otf",
+    "index.html": "/todo-matic/index.html",
+    "main.df0bb1d6.css.map": "/todo-matic/static/css/main.df0bb1d6.css.map",
+    "main.a79b794d.js.map": "/todo-matic/static/js/main.a79b794d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.df0bb1d6.css",
+    "static/js/main.a79b794d.js"
+  ]
+}
