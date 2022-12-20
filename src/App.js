@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Form from './components/Form';
 import FilterButton from './components/FilterButton';
 import Todo from "./components/Todo";
-import { nanoid } from 'https://cdn.jsdelivr.net/npm/nanoid/nanoid.js'
+import { nanoid } from "nanoid";
 
 const FILTER_MAP = {
   All: () => true,
